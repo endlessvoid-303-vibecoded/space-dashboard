@@ -16,18 +16,22 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Validate package.json
-        run: node -e "JSON.parse(require('fs').readFileSync('package.json','utf8'))"
+        run: |
+          node -e "JSON.parse(require('fs').readFileSync('package.json','utf8'))"
+          echo "package.json: valid"
 
       - name: Validate CI workflow YAML
-        run: npx -y js-yaml .github/workflows/ci.yml > /dev/null
+        run: |
+          python3 -c "import yaml; yaml.safe_load(open('.github/workflows/ci.yml')); print('ci.yml: valid')"
 
       - name: Validate deploy workflow YAML
-        run: npx -y js-yaml .github/workflows/deploy.yml > /dev/null
+        run: |
+          python3 -c "import yaml; yaml.safe_load(open('.github/workflows/deploy.yml')); print('deploy.yml: valid')"
 
   lint-test:
     name: Lint + Test + Typecheck
     needs: validate
-    if: hashFiles('svelte.config.js') != ''
+    if: "hashFiles('svelte.config.js') != ''"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -51,7 +55,7 @@ jobs:
   e2e:
     name: E2E (Playwright)
     needs: lint-test
-    if: hashFiles('svelte.config.js') != ''
+    if: "hashFiles('svelte.config.js') != ''"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
