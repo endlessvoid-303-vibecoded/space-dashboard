@@ -9,7 +9,26 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  validate:
+    name: Validate repo structure
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate package.json
+        run: node -e "JSON.parse(require('fs').readFileSync('package.json','utf8'))"
+
+      - name: Validate CI workflow YAML
+        run: npx -y js-yaml .github/workflows/ci.yml > /dev/null
+
+      - name: Validate deploy workflow YAML
+        run: npx -y js-yaml .github/workflows/deploy.yml > /dev/null
+
   lint-test:
+    name: Lint + Test + Typecheck
+    needs: validate
+    # Only run full pipeline when SvelteKit project is scaffolded
+    if: ${{ hashFiles('svelte.config.js') != '' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -31,7 +50,10 @@ jobs:
         run: npm test
 
   e2e:
+    name: E2E (Playwright)
     needs: lint-test
+    # Only run when SvelteKit project is scaffolded
+    if: ${{ hashFiles('svelte.config.js') != '' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
