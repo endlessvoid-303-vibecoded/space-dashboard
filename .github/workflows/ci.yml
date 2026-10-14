@@ -27,8 +27,7 @@ jobs:
   lint-test:
     name: Lint + Test + Typecheck
     needs: validate
-    # Only run full pipeline when SvelteKit project is scaffolded
-    if: ${{ hashFiles('svelte.config.js') != '' }}
+    if: hashFiles('svelte.config.js') != ''
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -52,8 +51,7 @@ jobs:
   e2e:
     name: E2E (Playwright)
     needs: lint-test
-    # Only run when SvelteKit project is scaffolded
-    if: ${{ hashFiles('svelte.config.js') != '' }}
+    if: hashFiles('svelte.config.js') != ''
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
