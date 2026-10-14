@@ -448,70 +448,71 @@ finer-grained sub-cards:
 ### Phase 0 — Repo & scaffolding (priority 9)
 | Card | Status | Owner | Description |
 |---|---|---|---|
-| `t_4d111236` | blocked→done | manager | Create repo + protected main (**unblock**: auth works, org was typo**) |
-| `t_7a3c001` | todo | developer | Scaffold SvelteKit: `npm create svelte@latest` + TypeScript + Tailwind + ESLint + Prettier |
-| `t_7a3c002` | todo | developer | Set up branch protection + GitHub Actions CI workflow |
+| `t_4d111236` | **done** | manager | Create repo + protected main (✅ created, auth verified, org typo fixed) |
+| `t_1c572d91` | ready | developer | Scaffold SvelteKit: `npm create svelte@latest` + TypeScript + Tailwind + ESLint + Prettier |
+| `t_c70adc61` | ready | developer | Set up branch protection + GitHub Actions CI workflow |
 
-### Phase 1 — Data layer (priority 8) `[t_0eafec43 parent]`
+### Phase 1 — Data layer (priority 8) `[t_0eafec43 umbrella, running]`
 | Card | Status | Owner | Description |
 |---|---|---|---|
-| `t_0eafec43` | running | developer | **SvelteKit API client** — refactor from Next.js spec to SvelteKit server endpoints |
-| `t_7a3c101` | todo | developer | zod schemas for all LL2 entities (pads, launches, agencies, celestial_bodies) |
-| `t_7a3c102` | todo | developer | LL2 API client: `fetchPads()`, `fetchUpcomingLaunches()`, `fetchAgencies()` |
-| `t_7a3c103` | todo | developer | Rate limiter: api-throttle probe + exponential backoff + budget scheduler |
-| `t_7a3c104` | todo | developer | Server-side cache: Map + LRU eviction + stale-while-revalidate |
-| `t_7a3c105` | todo | developer | Enricher: `enrichPadsWithNextLaunch()` — group launches by pad, earliest net |
-| `t_7a3c106` | todo | developer | SvelteKit `/api/pads`, `/api/launches`, `/api/agencies`, `/api/earth` endpoints |
+| `t_773dcad7` | todo | developer | zod schemas for all LL2 entities (pads, launches, agencies, celestial_bodies) |
+| `t_5f9b70e6` | todo | developer | LL2 API client: `fetchPads()`, `fetchUpcomingLaunches()`, `fetchAgencies()` (paginated) |
+| `t_a8814827` | todo | developer | Rate limiter: api-throttle probe + exponential backoff + budget scheduler |
+| `t_18b6e54a` | todo | developer | Server-side cache: Map + LRU eviction + stale-while-revalidate |
+| `t_c79e0a5b` | todo | developer | Enricher: `enrichPadsWithNextLaunch()` — group launches by pad, earliest net |
+| `t_5a002993` | todo | developer | SvelteKit `/api/pads`, `/api/launches`, `/api/agencies`, `/api/earth` endpoints |
 
-### Phase 2 — Globe + main view (priority 7) `[t_87bc609c parent]`
+### Phase 2 — Globe + main view (priority 7) `[t_87bc609c umbrella, running]`
 | Card | Status | Owner | Description |
 |---|---|---|---|
-| `t_87bc609c` | running | developer | **Globe view** — refactor from Next.js to SvelteKit + Globe.gl in onMount |
-| `t_7a3c201` | todo | developer | Globe.svelte: Globe.gl scene, Earth texture, auto-rotate, touch/gesture |
-| `t_7a3c202` | todo | developer | Logo sprites: CSS2D marker labels with `<img>` logos, fallback to abbrev badge |
-| `t_7a3c203` | todo | developer | Hover tooltip: pad name + operator + next launch name + net + countdown |
-| `t_7a3c204` | todo | developer | SidePanel.svelte: pad details, operator card, launch card, webcast modal |
-| `t_7a3c205` | todo | developer | Countdown.svelte: live client-side countdown (no API after initial load) |
-| `t_7a3c206` | todo | developer | StatusBadge.svelte: color-coded launch status |
-| `t_7a3c207` | todo | developer | Responsive layout: mobile overlay for side panel, pinch-to-zoom globe |
+| `t_abe20e9d` | todo | developer | Main dashboard page: `+page.svelte` + `+page.server.ts` data loading |
+| `t_ac2d2d59` | todo | developer | `Globe.svelte`: Globe.gl scene, Earth texture, auto-rotate, gestures |
+| `t_a61fe877` | todo | developer | Logo sprites: CSS2D marker labels with `<img>` logos, fallback to abbrev badge |
+| `t_58d0f34f` | todo | developer | Hover tooltip: pad name + operator + next launch + countdown |
+| `t_b3cef645` | todo | developer | `SidePanel.svelte`: pad details, operator card, launch card, webcast modal |
+| `t_14125d4c` | todo | developer | `Countdown.svelte`: live client-side countdown (no API after initial load) |
+| `t_819f0302` | todo | developer | `StatusBadge.svelte`: color-coded launch status |
+| `t_51145682` | todo | developer | Responsive layout: mobile side panel overlay, grid for nerd panels |
 
 ### Phase 3 — Nerdy extras (priority 6)
 | Card | Status | Owner | Description |
 |---|---|---|---|
-| `t_7a3c301` | todo | developer | LaunchTable.svelte: sortable table view (alt to globe) |
-| `t_7a3c302` | todo | developer | Timeline.svelte: upcoming launches on a horizontal timeline |
-| `t_7a3c303` | todo | developer | RawDataToggle: JSON inspection panel for pad/launch objects |
-| `t_7a3c304` | todo | developer | Rocket specs panel: rocket configuration details from LL2 |
-| `t_7a3c305` | todo | developer | /launch/[id] page: deep link to individual launch detail |
-| `t_7a3c306` | todo | developer | Astronaut roster: fetch astronauts endpoint, show in-space crew |
-| `t_7a3c307` | todo | developer | Dark / light mode toggle (space theme) |
+| `t_4427771d` | todo | developer | `LaunchTable.svelte`: sortable table view with countdown column |
+| `t_774d7927` | todo | developer | `Timeline.svelte`: upcoming launches on a horizontal timeline |
+| `t_8e7a114f` | todo | developer | `RawDataToggle`: JSON inspection panel for pad/launch objects |
+| `t_39a8bbd6` | todo | developer | `/launch/[id]` detail page (deep link) |
+| `t_67ff5522` | todo | developer | Rocket specs panel: rocket configuration details from LL2 |
+| `t_dd3ae358` | todo | developer | Dark/light mode toggle (space theme) |
+| ⏸️ **DEFERRED** | — | — | Astronaut roster (see Clarification #3) |
 
 ### Phase 4 — Testing & quality (priority 5)
 | Card | Status | Owner | Description |
 |---|---|---|---|
-| `t_7a3c401` | todo | developer | Vitest config + API client unit tests (pagination, 429 backoff, cache) |
-| `t_7a3c402` | todo | developer | Enricher + schema unit tests |
-| `t_7a3c403` | todo | developer | Component tests (Globe render, SidePanel, Countdown) via @testing-library/svelte |
-| `t_7a3c404` | todo | developer | Playwright E2E: globe renders with ≥1 logo sprite, click → side panel |
-| `t_7a3c405` | todo | developer | Pre-commit hooks: lint + type-check + test (via husky + lint-staged) |
+| `t_5ee9ef10` | todo | developer | Vitest config + API client unit tests (pagination, 429 backoff, cache) |
+| `t_ac9dbaf4` | todo | developer | Component tests (Globe, SidePanel, Countdown, StatusBadge) via @testing-library/svelte |
+| `t_506a536a` | ready | developer | Playwright E2E: globe renders, click marker → side panel |
+| `t_0ffa3b0b` | todo | developer | Pre-commit hooks: lint + type-check + test (husky + lint-staged) |
 
 ### Phase 5 — Deploy (priority 4)
 | Card | Status | Owner | Description |
 |---|---|---|---|
-| `t_7a3c501` | todo | developer | Vercel deploy config: `@sveltejs/adapter-vercel` + edge cache headers |
-| `t_7a3c502` | todo | developer | GitHub Actions: CI on PR (lint+test), CD on merge to main (deploy) |
-| `t_7a3c503` | todo | developer | README.md with setup instructions + architecture diagram |
+| `t_4cbbb68f` | ready | developer | Vercel deploy config: `@sveltejs/adapter-vercel` + edge cache headers |
+| `t_81b39695` | ready | developer | README.md: setup instructions + architecture diagram |
 
-### Dependencies
+### Dependencies (critical path)
 
 ```
-t_4d111236 (repo) → t_7a3c001 (scaffold) → all below
-t_7a3c001 → t_7a3c101 (schemas) → t_7a3c102 (client) → t_7a3c103 (rate limit) → t_7a3c104 (cache) → t_7a3c105 (enricher) → t_7a3c106 (endpoints)
-t_0eafec43 (API client meta) depends on t_7a3c101–t_7a3c106
-t_87bc609c (Globe meta) depends on t_0eafec43 + t_7a3c201–t_7a3c207
-Phase 3 depends on Phase 2 foundation
-Phase 4 depends on all implementation cards
-Phase 5 depends on Phase 4
+t_4d111236 (done) → t_1c572d91 (scaffold) → t_773dcad7 (schemas) → t_5f9b70e6 (client)
+  → t_a8814827 (rate limiter) → t_18b6e54a (cache) → t_c79e0a5b (enricher)
+  → t_5a002993 (endpoints) → t_0eafec43 (API umbrella, running)
+
+t_0eafec43 → t_abe20e9d (main page) → t_ac2d2d59 (Globe) → t_a61fe877 (logos)
+  → t_58d0f34f (tooltip) → t_b3cef645 (SidePanel) → t_14125d4c (Countdown)
+  → t_819f0302 (StatusBadge) → t_51145682 (Responsive)
+
+Phase 3 cards (t_4427771d–t_dd3ae358) depend on t_abe20e9d (main page)
+Phase 4 cards depend on Phase 1 + Phase 2 implementation
+Phase 5 cards depend on Phase 4
 ```
 
 ---
